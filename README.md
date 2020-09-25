@@ -5,82 +5,14 @@
 
 # Purge Google from your network!
 
-Protect yourself from Google's surveillance by using this blocklist!
+Protect yourself from Google's surveillance by using this blocklist! Feel free to criticize our blocklist to make it better and better. Suggestions are welcome!
 
-Feel free to criticize our blocklist to make it better and better.
-Suggestions are completely welcomed!
-
-## Youtube Advertisements Regex
->^r[0123456789]+((-{3})|(\.))sn-.{8}\.googlevideo\.com$
-
-NOTE: Youtube advertisements are pretty difficult to block trough DNS, as they mainly use a couple of domains for delivering advertisements, but they may also use those same domains for delivering other types of contents that you might not want to block.
-
-## Regex filters
->^[1234]\.bp\.blogspot\.com
-
->((.*)\.)?abc\.(.*)
-
->((.*)\.)?ampproject\.(.*)
-
->((.*)\.)?android\.(.*)
-
->((.*)\.)?chrome\.(.*)
-
->((.*)\.)?chromeexperiments\.(.*)
-
->((.*)\.)?chromium\.(.*)
-
->((.*)\.)?doubleclick\.(.*)
-
->((.*)\.)?firebaseio\.(.*)
-
->((.*)\.)?ggpht\.(.*)
-
->((.*)\.)?gmail\.(.*)
-
->((.*)\.)?google(\.(.*))?
-
->((.*)\.)?googleadservices\.(.*)
-
->((.*)\.)?googleapis\.(.*)
-
->((.*)\.)?googlesyndication\.(.*)
-
->((.*)\.)?googletagmanager\.(.*)
-
->((.*)\.)?googletagservices\.(.*)
-
->((.*)\.)?googleusercontent\.(.*)
-
->((.*)\.)?google-analytics\.(.*)
-
->((.*)\.)?gstatic\.(.*)
-
->((.*)\.)?gv(t[12])?\.(.*)
-
->((.*)\.)?waze\.(.*)
-
->((.*)\.)?withgoogle\.(.*)
-
->((.*)\.)?youtube\.(.*)
-
->((.*)\.)?ytimg\.(.*)
-
->.?1e100.
-
->.?googlebot.
-
->.?gmodules.
-
-You can also easily use the modified [pihole regex installer script](https://github.com/mmotti/pihole-regex) by [@mmoti](https://github.com/mmotti) by executing this terminal command from your raspberry Pi Pi-hole server.
+## How to use it on my Pi-hole?
+Simply go into to your blocklist settings to add:
 ```
-curl -sSl https://raw.githubusercontent.com/nickspaargaren/no-google/master/install.sh | bash
+https://raw.githubusercontent.com/nickspaargaren/no-google/master/pihole-google.txt
 ```
-and then, executing it. It should add all of the above regex automatically.
-
-## How to use it on my pihole ?
-Simply go into to your blocklist settings to add either, the whole filter `https://raw.githubusercontent.com/nickspaargaren/no-google/master/pihole-google.txt
-or either a selection of the filtered domains 
+Or a selection of the domains :
 ```
 https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/youtubeparsed
 https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/shortlinksparsed
@@ -95,28 +27,61 @@ https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/dom
 https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/dnsparsed
 https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/androidparsed
 https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/analyticsparsed
+https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/fiberparsed
 ```
 
 (Combining those with the main whole filter is useless and not recommended, however, feel free to combine the different smaller filters)
 
-## Can i use it with [NextDNS](nextdns.io) ?
-Yep ! It is available in their selection of domains list, labeled as ¨No G¨.
-NextDNS is using the wildcard-domains format, so you will have to manually wishlist some specific services, as it will block everything Google related.
 
-## Can i use it with my other ads/domains blocker program ?
-Surely ! if it does indeed support the host or domains type of filters.
-Import it manually, or [click on this link](https://subscribe.adblockplus.org/?location=https://raw.githubusercontent.com/nickspaargaren/no-google/master/google-domains&title=no-google) if you are using a web browser extension.
+## Youtube Advertisements Regex
+>^r[0123456789]+((-{3})|(\.))sn-.{8}\.googlevideo\.com$
 
-## Can i use it with anything else ?
-Sure thing, the No G list is declined into multiples formats types, as an host format, domains/urls format and a wildcard format.
+NOTE: Youtube advertisements are pretty difficult to block trough DNS, as they mainly use a couple of domains for delivering advertisements, but they may also use those same domains for delivering other types of contents that you might not want to block.
 
-## Hum, Do you got any mirrors of the list ?
-Yes indeed, We have a GitLab host mirror of the repo available at this address : https://framagit.org/PoorPocketsMcNewHold/no-google
+## Regex filters
+>(.*\.|^)((think)?with)?google($|((adservices|apis|mail|static|syndication|tagmanager|tagservices|usercontent|zip|-analytics)($|\..+)))
+>(.*\.|^)g(gpht|mail|static|v(t[12])?)($|\..+)
+>(.*\.|^)chrom(e(experiments)?|ium)($|\..+)
+>(.*\.|^)ampproject($|\..+)
+>(.*\.|^)doubleclick($|\..+)
+>(.*\.|^)firebaseio($|\..+)
+>(.*\.|^)googlevideo($|\..+)
+>(.*\.|^)waze($|\..+)
+>(.*\.|^)y(outube|timg)($|\..+)
+
+You can also easily use the modified [pihole regex installer script](https://github.com/mmotti/pihole-regex) by [@mmoti](https://github.com/mmotti) by executing this terminal command from your raspberry Pi Pi-hole server.
+```
+curl -sSl https://raw.githubusercontent.com/nickspaargaren/no-google/master/install.sh | bash
+```
+and then, executing it. It should add all of the above regex automatically.
+
+
+## FAQ
+
+<details>
+  <summary>Can I use it with [NextDNS](https://nextdns.io/)?</summary>
+  <p>Yep ! It is available in their selection of domains list, labeled as ¨No Google¨. NextDNS is using the wildcard-domains format, so you will have to manually whitelist some specific services, as it will block everything Google related.</p>
+</details>
+
+<details>
+  <summary>Can I use it with my other ads/domains blocker program ?</summary>
+  <p>Surely! If it does indeed support the host or domains type of filters. Import it manually, or [click on this link](https://subscribe.adblockplus.org/?location=https://raw.githubusercontent.com/nickspaargaren/no-google/master/google-domains&title=no-google) if you are using a web browser extension.</p>
+</details>
+
+<details>
+  <summary>Can I use it with anything other than Pi-hole?</summary>
+  <p>Sure thing, the No Google list is declined into multiples formats types, as an host format, domains/urls format and a wildcard format.</p>
+</details>
+
+<details>
+  <summary>Hum, do you got any mirrors of the list ?</summary>
+  <p>Yes indeed, We have a GitLab host mirror of the repo available at this address : https://framagit.org/PoorPocketsMcNewHold/no-google
 Note that the main filter is being worked here, so, updates and modifications on the Gitlab source will have to be updated manually.
-Otherwise, if you do prefer to use Gitlab, feel free to use it, and even contribute to our list there instead !
+Otherwise, if you do prefer to use Gitlab, feel free to use it, and even contribute to our list there instead!</p>
+</details>
 
-## Can i block the other letters of GAFAM ?
-Of course, Here´s some filterlists that should help you accomplish that.
+## Can I block the other letters of GAFAM ?
+Of course, here’s some filterlists that should help you accomplish that.
 
 **A**pple : https://github.com/c-edw/ios-telemetry, https://github.com/1r2/iosparanoid or https://gitlab.com/CHEF-KOCH/cks-filterlist/blob/master/Anti-Corp/filters/apple.txt
 
